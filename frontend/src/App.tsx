@@ -4,6 +4,7 @@ import { BandPowerChart } from './components/BandPowerChart';
 import { ChannelSelector } from './components/ChannelSelector';
 import { BrainStateDashboard } from './components/BrainStateDashboard';
 import { CorrelationChart } from './components/CorrelationChart';
+import { BrainRegionCoordination } from './components/BrainRegionCoordination';
 import { RecordingPanel } from './components/RecordingPanel';
 
 const App: React.FC = () => (
@@ -21,6 +22,7 @@ const App: React.FC = () => (
           <WaveformChart />
           <BandPowerChart />
           <CorrelationChart />
+          <BrainRegionCoordination />
         </div>
         <div style={{ flex: '0 0 340px', maxWidth: '400px' }}>
           <BrainStateDashboard />

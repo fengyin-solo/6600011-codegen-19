@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from ..services.eeg_processor import generate_mock_eeg, compute_band_power, compute_spectrogram, compute_brain_state, compute_correlation, SAMPLE_RATE
+from ..services.eeg_processor import generate_mock_eeg, compute_band_power, compute_spectrogram, compute_brain_state, compute_correlation, compute_brain_region_coordination, compute_coordination_trend, SAMPLE_RATE
 
 router = APIRouter(prefix="/eeg", tags=["eeg"])
 
@@ -53,3 +53,13 @@ async def full_sample(channel: str, duration: float = 3.0):
         'brainState': compute_brain_state(channel_data, SAMPLE_RATE),
         'correlation': compute_correlation(channel, data['data'], SAMPLE_RATE)
     }
+
+@router.get("/brain-region-coordination")
+async def brain_region_coordination(duration: float = 5.0):
+    data = generate_mock_eeg(duration)
+    return compute_brain_region_coordination(data['data'], SAMPLE_RATE)
+
+@router.get("/coordination-trend")
+async def coordination_trend(duration: float = 5.0, window: float = 1.0):
+    data = generate_mock_eeg(duration)
+    return compute_coordination_trend(data['data'], SAMPLE_RATE, window)

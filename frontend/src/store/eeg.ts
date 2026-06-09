@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { EEGData, BandPower, BrainState, CorrelationData, Recording, RecordingFrame, PlaybackState } from '../types';
+import { EEGData, BandPower, BrainState, CorrelationData, Recording, RecordingFrame, PlaybackState, BrainRegionCoordinationData, CoordinationTrendData } from '../types';
 
 const STORAGE_KEY = 'eeg_recordings';
 
@@ -25,6 +25,8 @@ interface EEGState {
   isStreaming: boolean;
   brainState: BrainState | null;
   correlationData: CorrelationData | null;
+  brainRegionCoordination: BrainRegionCoordinationData | null;
+  coordinationTrend: CoordinationTrendData | null;
   isRecording: boolean;
   recordingStartTime: number;
   currentRecordingFrames: RecordingFrame[];
@@ -38,6 +40,8 @@ interface EEGState {
   setStreaming: (v: boolean) => void;
   setBrainState: (s: BrainState | null) => void;
   setCorrelationData: (c: CorrelationData | null) => void;
+  setBrainRegionCoordination: (d: BrainRegionCoordinationData | null) => void;
+  setCoordinationTrend: (d: CoordinationTrendData | null) => void;
   startRecording: () => void;
   stopRecording: (name: string) => void;
   addRecordingFrame: (eeg: EEGData, bands: BandPower, brainState: BrainState) => void;
@@ -56,6 +60,8 @@ export const useEEGStore = create<EEGState>((set, get) => ({
   isStreaming: false,
   brainState: null,
   correlationData: null,
+  brainRegionCoordination: null,
+  coordinationTrend: null,
   isRecording: false,
   recordingStartTime: 0,
   currentRecordingFrames: [],
@@ -73,6 +79,8 @@ export const useEEGStore = create<EEGState>((set, get) => ({
   setStreaming: (v) => set({ isStreaming: v }),
   setBrainState: (s) => set({ brainState: s }),
   setCorrelationData: (c) => set({ correlationData: c }),
+  setBrainRegionCoordination: (d) => set({ brainRegionCoordination: d }),
+  setCoordinationTrend: (d) => set({ coordinationTrend: d }),
   startRecording: () => {
     const { selectedChannel } = get();
     set({

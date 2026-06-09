@@ -20,6 +20,40 @@ export interface CorrelationData {
   correlations: ChannelCorrelation[];
 }
 
+export interface BrainRegion {
+  key: string;
+  name: string;
+  channels: string[];
+}
+export interface RegionPairCoordination {
+  regionA: string;
+  regionAName: string;
+  regionB: string;
+  regionBName: string;
+  overall: number;
+  alpha: number;
+  beta: number;
+  theta: number;
+  correlation: number;
+}
+export interface BrainRegionCoordinationData {
+  regions: BrainRegion[];
+  matrix: number[][];
+  pairs: RegionPairCoordination[];
+  timestamp: number;
+}
+export interface CoordinationTrendPair {
+  key: string;
+  regionA: string;
+  regionAName: string;
+  regionB: string;
+  regionBName: string;
+}
+export interface CoordinationTrendData {
+  trend: Record<string, number>[];
+  pairs: CoordinationTrendPair[];
+}
+
 export interface RecordingFrame {
   relativeTime: number;
   eeg: EEGData;
